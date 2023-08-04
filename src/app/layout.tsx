@@ -2,6 +2,7 @@ import { Footer, Navbar } from '@/components'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import ThemeProvider from '@/providers/ThemeProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,15 +17,19 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="dark" className='transition-all'>
       <body className={inter.className}>
-        
-        <Navbar></Navbar>
 
-        {children}
+        <ThemeProvider>
+          <Navbar></Navbar>
 
-        <Footer></Footer>
-        
+          {children}
+
+          <Footer></Footer>
+        </ThemeProvider>
+
+
+
       </body>
     </html>
   )
