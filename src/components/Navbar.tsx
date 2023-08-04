@@ -1,21 +1,45 @@
 "use client"
 
+import useAuth from '@/hooks/useAuth';
 import useTheme, { Theme } from '@/hooks/useTheme';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import React, { startTransition, useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 const Navbar = () => {
 
-    const user = null;
+    const { user, logOut }: any = useAuth();
 
     const { theme, toggleTheme } = useTheme() as Theme;
 
     const navMenus = <>
-        <li><a>Item 1</a></li>
-        <li><a>Item 2</a></li>
-        <li><a>Item 3</a></li>
+        <li><Link href="/">Home</Link></li>
+        <li><Link href="/about">About</Link></li>
+        <li><Link href="/cars">Cars</Link></li>
+        <li><Link href="/myCars">My Cars</Link></li>
+        <li><Link href="/dashboard">Dashboard</Link></li>
+        <li><Link href="/contact">Contact</Link></li>
     </>
+
+    const { replace, refresh } = useRouter();
+    const path = usePathname();
+
+    const handleLogout = async () => {
+        const toastId = toast.loading("Loading...");
+        try {
+            await logOut();
+            toast.dismiss(toastId);
+            toast.success("Successfully logout!");
+            startTransition(() => {
+                refresh();
+            });
+        } catch (error) {
+            toast.error("Successfully not logout!");
+            toast.dismiss(toastId);
+        }
+    };
 
     return (
         <div className="navbar bg-base-100">
@@ -24,14 +48,14 @@ const Navbar = () => {
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </label>
-                    <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <ul tabIndex={0} className="menu menu-sm space-y-2 dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                         {navMenus}
                     </ul>
                 </div>
-                <h3 className="normal-case text-xl">Car-Hub</h3>
+                <h3 className="normal-case text-2xl font-bold">Car-Hub</h3>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
+                <ul className="menu menu-horizontal px-1 space-x-2">
                     {navMenus}
                 </ul>
             </div>
@@ -41,8 +65,14 @@ const Navbar = () => {
                     user ?
                         <div className="dropdown dropdown-end">
                             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                                <div className="w-6  rounded-full">
-                                    <Image fill alt='user image' className='p-2 w-full rounded-full' src="https://i.ibb.co/5nPD3Qg/user.jpg" />
+                                <div className="w-10 rounded-full">
+                                    <Image
+                                        alt="user picture"
+                                        src={user?.photoURL ? user?.photoURL : "https://i.ibb.co/5nPD3Qg/user.jpg"}
+                                        title={user?.displayName}
+                                        width={40}
+                                        height={40}
+                                    />
                                 </div>
                             </label>
                             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
@@ -53,7 +83,7 @@ const Navbar = () => {
                                     </a>
                                 </li>
                                 <li><a>Settings</a></li>
-                                <li><a>Logout</a></li>
+                                <li onClick={handleLogout}><a>Logout</a></li>
                             </ul>
                         </div>
                         :
