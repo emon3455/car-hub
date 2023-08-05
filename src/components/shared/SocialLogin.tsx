@@ -6,34 +6,35 @@ import { startTransition } from 'react';
 import { FaGoogle } from 'react-icons/fa';
 import { useRouter, useSearchParams } from 'next/navigation';
 import useAuth from '@/hooks/useAuth';
-// import createJWT from '@/utils/createJWT';
+import createJWT from '@/utils/createJWT';
 
 const SocialLogin: React.FC = () => {
 
-  const { signInWithGoggle }:any = useAuth();
+  const { signInWithGoggle }: any = useAuth();
 
   const search = useSearchParams();
   const from = search.get('redirectUrl') || '/';
   const { replace, refresh } = useRouter();
 
   const handleGoogleLogin = async () => {
-    const toastId = toast.loading('Loading...');
+    const toastId = toast.loading("Loading...");
     try {
       const { user } = await signInWithGoggle();
 
-    //   await createJWT({ email: user.email });
-
+      await createJWT({ email: user.email });
       startTransition(() => {
         refresh();
         replace(from);
         toast.dismiss(toastId);
-        toast.success('User signed in successfully');
+        toast.success("User signed in successfully");
       });
+
     } catch (error:any) {
       toast.dismiss(toastId);
-      toast.error(error.message || 'User not signed in');
+      toast.error(error.message || "User not signed in");
     }
   };
+
 
   return (
     <div className="">

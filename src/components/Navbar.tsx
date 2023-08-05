@@ -2,6 +2,7 @@
 
 import useAuth from '@/hooks/useAuth';
 import useTheme, { Theme } from '@/hooks/useTheme';
+import { cookies } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -30,6 +31,13 @@ const Navbar = () => {
         const toastId = toast.loading("Loading...");
         try {
             await logOut();
+            const res = await fetch("/api/auth/logout", {
+                method: "POST",
+            });
+            await res.json();
+            if (path.includes("/dashboard") || path.includes("/profile")) {
+                replace(`/login?redirectUrl=${path}`);
+            }
             toast.dismiss(toastId);
             toast.success("Successfully logout!");
             startTransition(() => {
@@ -40,6 +48,7 @@ const Navbar = () => {
             toast.dismiss(toastId);
         }
     };
+
 
     return (
         <div className="navbar bg-base-100">

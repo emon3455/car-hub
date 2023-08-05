@@ -8,7 +8,7 @@ import { startTransition } from 'react';
 import { FaEyeSlash } from 'react-icons/fa';
 import useAuth from '@/hooks/useAuth';
 
-// import createJWT from '@/utils/createJWT';
+import createJWT from '@/utils/createJWT';
 
 interface LoginFormValues {
     email: string;
@@ -29,25 +29,30 @@ const LoginForm: React.FC<LoginFormProps> = () => {
     } = useForm<LoginFormValues>();
 
     const search = useSearchParams();
-    const from = search.get('redirectUrl') || '/';
+    const from = search.get("redirectUrl") || "/";
     const { replace, refresh } = useRouter();
 
-    const onSubmit: SubmitHandler<LoginFormValues> = async (data) => {
+
+    const onSubmit = async (data:any) => {
         const { email, password } = data;
-        const toastId = toast.loading('Loading...');
+        const toastId = toast.loading("Loading...");
         try {
-            await signInUser(email, password); // Make sure to import signInUser from the correct path
-            //   await createJWT({ email });
+
+            await signInUser(email, password);
+            await createJWT({ email })
 
             startTransition(() => {
                 refresh();
                 replace(from);
                 toast.dismiss(toastId);
-                toast.success('User signed in successfully');
+                toast.success("User signed in successfully");
             });
-        } catch (error: any) {
+
+        } catch (error:any) {
+
             toast.dismiss(toastId);
-            toast.error(error.message || 'User not signed in');
+            toast.error(error.message || "User not signed in");
+
         }
     };
 

@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 import { FaEyeSlash } from 'react-icons/fa';
 
 import useAuth from '@/hooks/useAuth'; // Update the import path based on your useAuth implementation
-// import createJWT from '@/utils/createJWT';
+import createJWT from '@/utils/createJWT';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { startTransition } from 'react';
 
@@ -23,7 +23,7 @@ const SignupForm: React.FC<SignupFormProps> = () => {
     const { createUser, profileUpdate }: any = useAuth();
 
     const search = useSearchParams();
-    const from = search.get('redirectUrl') || '/';
+    const from = search.get("redirectUrl") || "/";
     const { replace, refresh } = useRouter();
 
     const {
@@ -60,12 +60,13 @@ const SignupForm: React.FC<SignupFormProps> = () => {
         }
     };
 
-    const onSubmit = async (data: FormData) => {
+    const onSubmit = async (data:any, event:any) => {
+
         const { name, email, password, photo } = data;
-        const toastId = toast.loading('Loading...');
+        const toastId = toast.loading("Loading...");
         try {
             const user = await createUser(email, password);
-            //   await createJWT({ email });
+            await createJWT({ email });
 
             await profileUpdate({
                 displayName: name,
@@ -76,11 +77,13 @@ const SignupForm: React.FC<SignupFormProps> = () => {
                 refresh();
                 replace(from);
                 toast.dismiss(toastId);
-                toast.success('User signed up successfully');
+                toast.success("User signed in successfully");
             });
-        } catch (err: any) {
+            
+
+        } catch (err:any) {
             toast.dismiss(toastId);
-            toast.error(err.message || 'User not signed up');
+            toast.error(err.message || "User not signed in");
         }
     };
 
