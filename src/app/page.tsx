@@ -1,9 +1,17 @@
+import Banner from '@/components/home/Banner'
+// import CarsLayout from '@/components/home/CarsLayout'
+import getCars from '@/hooks/getCars'
 import Image from 'next/image'
 
-export default function Home() {
+export default async function HomePage() {
+
+  const allCars = await getCars();
+
   return (
+
     <main className="">
-        home page
+      <Banner />
+      {/* <CarsLayout allCars={allCars}></CarsLayout> */}
     </main>
   )
 }
