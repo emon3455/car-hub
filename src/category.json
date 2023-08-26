@@ -1,0 +1,28 @@
+[
+    
+    {
+        "category": "Basic Vehicles",
+        "category_id": "0",
+        "picture": "https://images.unsplash.com/photo-1490902931801-d6f80ca94fe4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+    },
+    {
+        "category": "Sports Cars",
+        "category_id": "1",
+        "picture": "https://i.ibb.co/tbQ2nDs/car2.jpg"
+    },
+    {
+        "category": "Luxirious Vehicles",
+        "category_id": "2",
+        "picture": "https://i.ibb.co/k4s6qF7/car14.jpg"
+    },
+    {
+        "category": "Remote Control Cars",
+        "category_id": "3",
+        "picture": "https://i.ibb.co/TB4P6m3/car10.jpg"
+    },
+    {
+        "category": "Transport Vehicles",
+        "category_id": "4",
+        "picture": "https://images.unsplash.com/photo-1536846511313-4b07b637bff9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDl8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60"
+    }
+]
