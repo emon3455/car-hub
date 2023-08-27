@@ -6,7 +6,7 @@ import CountUp from 'react-countup';
 const Statistics = () => {
     return (
         <div className='flex justify-center p-4'>
-            <div className="stats shadow-lg shadow-red-400/50">
+            <div className="stats shadow-lg shadow-violet-500/50">
 
                 <div className="stat">
                     <div className="stat-figure text-primary">
