@@ -6,7 +6,7 @@ import React from 'react';
 
 const SignupPage = () => {
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-2 justify-items-center items-center gap-5 p-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 justify-items-center items-center gap-5 p-4">
             <div className="card w-full max-w-2xl shadow-lg shadow-yellow-400/50 bg-base-100 order-2 md:order-1" style={{ borderRadius: '0 50px 0 50px' }}>
 
                 <SignupForm></SignupForm>
