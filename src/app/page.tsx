@@ -19,6 +19,11 @@ export default async function HomePage() {
 
       <TopCategories categories={categories} />
 
+      {/* one paralax */}
+
+      {/* top cars with animations  */}
+
+      {/* review section with slider */}
 
     </main>
   )
