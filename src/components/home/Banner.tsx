@@ -2,7 +2,7 @@ import React from 'react';
 
 const Banner = () => {
     return (
-        <div className="hero w-full" style={{ backgroundImage: `url(bg.jpg)` }}>
+        <div className="hero w-full h-96" style={{ backgroundImage: `url(bg.jpg)` }}>
             <div className="hero-overlay bg-opacity-40"></div>
             <div className="max-w-lg me-auto p-4 text-white">
                 <h1 className="mb-4 text-2xl lg:text-4xl text-white font-bold">Sell, Buy, Explore Cars Hassle-Free</h1>
