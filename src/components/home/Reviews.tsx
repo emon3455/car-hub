@@ -22,7 +22,7 @@ const reviews = [
         "name": "Emon",
         "details": "I've had a great experience with this car website. The information provided was very informative, and I was able to find the perfect car for my needs. The website's design is user-friendly too.",
         "rating": 4.7,
-        "image": "https://i.ibb.co/pXGRZzX/Emon-Image.jpg"
+        "image": "https://xsgames.co/randomusers/assets/avatars/male/46.jpg"
     },
     {
         "_id": "2b3c4d5e6f7a",
@@ -65,13 +65,13 @@ const Reviews = () => {
                 What Our Clients Say
             </h2>
 
-            <div className="shadow-lg rounded-md p-4">
+            <div className="rounded-md p-4 shadow-lg shadow-violet-400/50">
                 <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
                     {
                         reviews.map(review => <SwiperSlide key={review._id}>
                             <div className="flex flex-col justify-center items-center w-4/5 mx-auto space-y-4">
                                 <div className="">
-                                    <Image src={review.image} width={80} height={80} alt="cars image" className='rounded-full mx-auto' />
+                                    <Image src={review.image} width={70} height={70} alt="cars image" className='rounded-full mx-auto' />
                                 </div>
                                 <Rating
                                     style={{ maxWidth: 180 }}

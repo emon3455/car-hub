@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { startTransition, useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { FaCarSide } from 'react-icons/fa';
 
 const Navbar = () => {
 
@@ -21,6 +22,7 @@ const Navbar = () => {
         <li><Link href="/cars">Cars</Link></li>
         <li><Link href="/myCars">My Cars</Link></li>
         <li><Link href="/dashboard">Dashboard</Link></li>
+        <li><Link href="#services">Services</Link></li>
         <li><Link href="#reviews">Reviews</Link></li>
         <li><Link href="#contact">Contact</Link></li>
     </>
@@ -52,7 +54,7 @@ const Navbar = () => {
 
 
     return (
-        <div className="navbar bg-base-400 shadow-lg z-20 sticky top-0 bg-base-100">
+        <div className="navbar bg-base-400 shadow-md shadow-red-500/50 z-30 sticky top-0 bg-base-100">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -62,7 +64,7 @@ const Navbar = () => {
                         {navMenus}
                     </ul>
                 </div>
-                <h3 className="normal-case text-2xl font-bold">Car-Hub</h3>
+                <h3 className="normal-case xl:text-2xl font-bold flex items-center gap-x-1"><span className='font-semibold text-white p-1 rounded-full bg-gradient-to-r  from-pink-500 via-purple-500 to-indigo-500'><FaCarSide/></span>Car-Hub</h3>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 space-x-2">
@@ -85,7 +87,7 @@ const Navbar = () => {
                                     />
                                 </div>
                             </label>
-                            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-white rounded-box w-52">
                                 <li>
                                     <a className="justify-between">
                                         Profile

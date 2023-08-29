@@ -34,12 +34,10 @@ export default async function HomePage() {
 
       <TopCars topCars={topCars} />
 
-      {/* services */}
       <Services/>
 
       <Reviews />
 
-      {/* contact */}
       <Contact />
 
     </main>
