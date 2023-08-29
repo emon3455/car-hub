@@ -9,10 +9,6 @@ const TopCars = ({ topCars }: any) => {
 
     const [items, setItems] = useState(topCars);
 
-    // useEffect(()=>{
-    //     setItems(topCars)
-    // },[topCars])
-
     return (
         <section className='p-2 my-10 w-full md:w-4/5 mx-auto'>
             <div className="my-5">

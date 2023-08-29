@@ -18,7 +18,7 @@ const Overview = ( {title, subtitle, img}: OverviewProps) => {
         >
             <div className="hero h-[600px] bg-cover">
                 <div className="hero-overlay bg-opacity-30"></div>
-                <div className="hero-content lg:text-center text-neutral-content lg:px-40 py-20 bg-red-200 bg-opacity-20">
+                <div className="hero-content lg:text-center text-white lg:px-40 py-20 bg-red-300 bg-opacity-20">
                     <div className=" max-w-lg">
                         <h1 className="mb-5 text-4xl font-extrabold uppercase">{title}</h1>
                         <p className="mb-5">

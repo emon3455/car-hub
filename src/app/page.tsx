@@ -6,6 +6,8 @@ import TopCategories from '@/components/home/TopCategories';
 import Overview from '@/components/home/Overview';
 import TopCars from '@/components/home/TopCars';
 import getTopCars from '@/utils/getTopCars';
+import Services from '@/components/home/Services';
+import Reviews from '@/components/home/Reviews';
 
 export default async function HomePage() {
 
@@ -31,8 +33,11 @@ export default async function HomePage() {
 
       <TopCars topCars={topCars} />
 
+
+      <Services/>
+
       {/* review section with slider */}
-      
+      <Reviews />
 
     </main>
   )
