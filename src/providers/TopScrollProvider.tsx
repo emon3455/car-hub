@@ -13,8 +13,9 @@ function TopScrollProvider({ children }: any) {
         left: 0,
         right: 0,
         height: "5px",
-        background: "orange",
+        background: "violet",
         transformOrigin: "0%",
+        zIndex: 50
       }}
     />
   )

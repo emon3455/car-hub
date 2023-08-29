@@ -17,11 +17,11 @@ const Navbar = () => {
 
     const navMenus = <>
         <li><Link href="/">Home</Link></li>
-        <li><Link href="/about">About</Link></li>
+        <li><Link href="#about">About</Link></li>
         <li><Link href="/cars">Cars</Link></li>
         <li><Link href="/myCars">My Cars</Link></li>
         <li><Link href="/dashboard">Dashboard</Link></li>
-        <li><Link href="/contact">Contact</Link></li>
+        <li><Link href="#contact">Contact</Link></li>
     </>
 
     const { replace, refresh } = useRouter();
@@ -96,7 +96,7 @@ const Navbar = () => {
                             </ul>
                         </div>
                         :
-                        <Link href="/login" className="btn btn-sm btn-warning">Login</Link>
+                        <Link href="/login" className="px-2 py-1 text-white rounded-sm font-semibold bg-gradient-to-r  from-pink-500 via-purple-500 to-indigo-500">Login</Link>
                 }
 
                 <div className="ms-1">

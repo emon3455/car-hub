@@ -19,7 +19,7 @@ const TopCategories = ({ categories }: any) => {
 
     return (
         <section className='p-2 my-10 w-full md:w-4/5 mx-auto'>
-            <h2 className='text-2xl font-bold border-l-4 border-red-500 my-5 pl-2'>Top Categories</h2>
+            <h2 className='text-xl font-bold border-l-4 border-red-500 my-5 pl-2'>Top Categories</h2>
 
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
 
@@ -37,7 +37,7 @@ const TopCategories = ({ categories }: any) => {
             </div>
 
             <div className="text-center my-4">
-                <button onClick={()=> setShow(!show)} className="p-2 text-white rounded-lg font-semibold bg-gradient-to-r  from-pink-500 via-purple-500 to-indigo-500 ">{show ? <span className='flex items-center gap-x-2'>Show Less <FaPlus/> </span> : <span className='flex items-center gap-x-2'>Show All <FaExpandArrowsAlt/></span>}</button>
+                <button onClick={()=> setShow(!show)} className="p-2 text-white rounded-sm font-semibold bg-gradient-to-r  from-pink-500 via-purple-500 to-indigo-500 ">{show ? <span className='flex items-center gap-x-2'>Show Less <FaPlus/> </span> : <span className='flex items-center gap-x-2'>Show All <FaExpandArrowsAlt/></span>}</button>
             </div>
 
         </section>

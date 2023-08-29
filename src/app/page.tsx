@@ -4,12 +4,16 @@ import Statistics from '@/components/home/Statistics';
 import getCategoriesData from '@/utils/getCategoriesData';
 import TopCategories from '@/components/home/TopCategories';
 import Overview from '@/components/home/Overview';
-import TopCars from '@/components/home/TopCars/TopCars';
+import TopCars from '@/components/home/TopCars';
+import getTopCars from '@/utils/getTopCars';
 
 export default async function HomePage() {
 
   const categories = await getCategoriesData();
-  console.log(categories);
+
+  const topCars = await getTopCars();
+  console.log(topCars);
+  
 
   return (
 
@@ -25,10 +29,10 @@ export default async function HomePage() {
 
       <Overview title='A Journey Through the Car Enthusiasts Universe.' subtitle=' Unveiling Automotive Wonders, Driving Enthusiasm, and Navigating the Road Ahead. Embark on an Epic Expedition of Speed, Style, and Automotive Passion' img="https://i.ibb.co/vjxPzXT/optical-chemist-a-F65-Lob-ND1-A-unsplash.jpg"/>
 
-      {/* top cars with animations  */}
-      <TopCars />
+      <TopCars topCars={topCars} />
 
       {/* review section with slider */}
+      
 
     </main>
   )

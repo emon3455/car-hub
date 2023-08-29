@@ -21,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" data-theme="dark" className='transition-all'>
+    <html lang="en" data-theme="dark" className='transition-all scroll-smooth'>
 
       <body className={inter.className}>
 
