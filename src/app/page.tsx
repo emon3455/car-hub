@@ -8,6 +8,7 @@ import TopCars from '@/components/home/TopCars';
 import getTopCars from '@/utils/getTopCars';
 import Services from '@/components/home/Services';
 import Reviews from '@/components/home/Reviews';
+import Contact from '@/components/home/Contact';
 
 export default async function HomePage() {
 
@@ -33,11 +34,13 @@ export default async function HomePage() {
 
       <TopCars topCars={topCars} />
 
-
+      {/* services */}
       <Services/>
 
-      {/* review section with slider */}
       <Reviews />
+
+      {/* contact */}
+      <Contact />
 
     </main>
   )
