@@ -3,13 +3,16 @@
 import Loading from '@/app/loading';
 import { useGetAllCarsDataQuery } from '@/redux/features/cars/carsSlice';
 import Image from 'next/image';
-import Link from 'next/link';
 // import { useGetAllCarsQuery } from '@/redux/features/cars/carsSlice';
 import React, { useState } from 'react';
+import CModal from '../custom/CModal/CModal';
+import SingleCar from './SingleCar';
 
 const Cars = () => {
 
     const [sort, setSort] = useState(true);
+    const [open, setIsOpen] = useState(false);
+    const [car, setCar] = useState({});
 
     const { isError, isLoading, data: cars, error, isFetching } = useGetAllCarsDataQuery(
         { sort: sort ? "asc" : "desc" },
@@ -17,9 +20,6 @@ const Cars = () => {
             refetchOnMountOrArgChange: true,
         }
     )
-    console.log(isFetching);
-    console.log(isError);
-    console.log(error);
 
 
     if (isLoading) {
@@ -31,8 +31,6 @@ const Cars = () => {
             {error?.error}
         </h2>
     }
-
-
 
     return (
         <section className="max-w-6xl mx-auto">
@@ -56,10 +54,13 @@ const Cars = () => {
                         <div className="p-4 space-y-1">
                             <h4 className='text-lg font-bold'>{item.toyName}</h4>
                             <p className=''>
-                                Price: {item.price}
+                                Price: {item.price} $
                             </p>
                             <div className="text-center">
-                                <button className='px-2 py-1 bg-warning rounded-sm text-sm'>
+                                <button onClick={() => {
+                                    setCar(item);
+                                    setIsOpen(true);
+                                }} className='px-2 py-1 bg-warning rounded-sm text-sm'>
                                     View Details
                                 </button>
                             </div>
@@ -68,6 +69,16 @@ const Cars = () => {
                     </div>)
                 }
             </div>
+
+
+            <CModal
+                open={open}
+                onClose={() => setIsOpen(false)}
+                title="Car Details"
+                width={"w-full md:w-3/4 lg:w-2/3"}
+            >
+                <SingleCar car={car} />
+            </CModal>
 
         </section>
     );

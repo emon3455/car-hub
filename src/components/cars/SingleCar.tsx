@@ -1,24 +1,34 @@
 "use client"
+import Image from 'next/image';
 import React from 'react';
-// import CModal from '../custom/CModal/CModal';
 
-const SingleCar = () => {
+const SingleCar = ({ car }: any) => {
 
-    // const [open, setIsOpen] = useState(false); 
+    console.log(car);
+
     return (
-        <div>
-            single car page
+        <section>
 
+            {
+                car && <div className="card lg:card-side bg-base-100 shadow-xl">
+                    <figure>
+                        <Image src={car?.picture} width={400} height={500} alt="cars" />
+                    </figure>
+                    <div className="card-body">
+                        <h2 className="card-title">
+                            {car.toyName}
+                        </h2>
+                        <p>
+                            {car.description}
+                        </p>
+                        <div className="card-actions justify-end">
+                            <button className="btn btn-primary">Select</button>
+                        </div>
+                    </div>
+                </div>
+            }
 
-            {/* <CModal 
-            open={open}
-            onClose={() => setIsOpen(false)}
-            title="Car Details"
-            width={"w-full md:w-3/4 lg:w-2/3"}
-            >
-                <h2>open</h2>
-            </CModal> */}
-        </div>
+        </section>
     );
 };
 

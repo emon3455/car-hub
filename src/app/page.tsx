@@ -15,7 +15,6 @@ export default async function HomePage() {
   const categories = await getCategoriesData();
 
   const topCars = await getTopCars();
-  console.log(topCars);
   
 
   return (
