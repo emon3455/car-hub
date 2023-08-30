@@ -4,8 +4,6 @@ import React from 'react';
 
 const SingleCar = ({ car }: any) => {
 
-    console.log(car);
-
     return (
         <section>
 

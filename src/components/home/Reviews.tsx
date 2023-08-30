@@ -54,7 +54,6 @@ const reviews = [
     }
 ];
 
-console.log(reviews);
 
 
 const Reviews = () => {

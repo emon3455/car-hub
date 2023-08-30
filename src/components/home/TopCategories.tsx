@@ -6,7 +6,6 @@ import { FaExpandArrowsAlt, FaPlus } from 'react-icons/fa';
 
 const TopCategories = ({ categories }: any) => {
 
-    console.log(categories);
     const [show, setShow] = useState(false);
     const [ data, setData] = useState([]);
     useEffect(()=>{
