@@ -11,12 +11,16 @@ const Cars = () => {
 
     const [sort, setSort] = useState(true);
 
-    const { isError, isLoading, data: cars, error } = useGetAllCarsDataQuery(
+    const { isError, isLoading, data: cars, error, isFetching } = useGetAllCarsDataQuery(
         { sort: sort ? "asc" : "desc" },
         {
             refetchOnMountOrArgChange: true,
         }
     )
+    console.log(isFetching);
+    console.log(isError);
+    console.log(error);
+
 
     if (isLoading) {
         return <Loading />
@@ -24,7 +28,7 @@ const Cars = () => {
 
     if (isError) {
         return <h2 className="text-center font-semibold text-xl mt-4 text-red-500">
-            {error?.message}
+            {error?.error}
         </h2>
     }
 
@@ -35,7 +39,7 @@ const Cars = () => {
 
             <div className="flex gap-x-2 items-center my-5 z-10">
                 <h2 className='text-xl border-l-4 pl-2 border-red-500'>Sort:</h2>
-                <select name="sort" id="sort" onChange={()=> setSort(!sort)} className='p-2 border-2 border-violet-600 w-32 focus:outline-none'>
+                <select name="sort" id="sort" onChange={() => setSort(!sort)} className='p-2 border-2 border-violet-600 w-32 focus:outline-none'>
                     <option value="asc">Asending</option>
                     <option value="desc">Desending</option>
                 </select>
@@ -55,11 +59,9 @@ const Cars = () => {
                                 Price: {item.price}
                             </p>
                             <div className="text-center">
-                                <Link href={`/cars/${item._id}`}>
-                                    <button className='px-2 py-1 bg-warning rounded-sm text-sm'>
-                                        View Details
-                                    </button>
-                                </Link>
+                                <button className='px-2 py-1 bg-warning rounded-sm text-sm'>
+                                    View Details
+                                </button>
                             </div>
                         </div>
 
