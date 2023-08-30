@@ -6,6 +6,7 @@ import ThemeProvider from '@/providers/ThemeProvider'
 import Toaster from '@/components/Toast'
 import AuthProvider from '@/providers/AuthProvider'
 import TopScrollProvider from '@/providers/TopScrollProvider'
+import ReduxProvider from '@/redux/reduxProvoder/ReduxProvider'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -25,17 +26,21 @@ export default function RootLayout({
 
       <body className={inter.className}>
 
-        <AuthProvider>
-          <ThemeProvider>
-            <Navbar></Navbar>
+        <ReduxProvider>
+          <AuthProvider>
+            <ThemeProvider>
+              <Navbar></Navbar>
 
-            {children}
+              {children}
 
-            <Footer></Footer>
-          </ThemeProvider>
-        </AuthProvider>
+              <Footer></Footer>
+            </ThemeProvider>
+          </AuthProvider>
+        </ReduxProvider>
 
-        <TopScrollProvider/>
+
+
+        <TopScrollProvider />
 
         <Toaster />
 
