@@ -15,7 +15,19 @@ export const carsSlice = apiSlice.injectEndpoints({
             },
         }),
 
+        getAllMycarsData: builder.query({
+            query: (data:{
+                email: string;
+            })=>{
+                const {email} = data;
+                return{
+                    url: `/getCarsBySellerEmail?sellerEmail=${email}`,
+                    method: "GET"
+                }
+            }
+        })
+
     }),
 });
 
-export const {useGetAllCarsDataQuery} = carsSlice;
+export const {useGetAllCarsDataQuery, useGetAllMycarsDataQuery} = carsSlice;

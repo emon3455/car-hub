@@ -3,7 +3,6 @@
 import Loading from '@/app/loading';
 import { useGetAllCarsDataQuery } from '@/redux/features/cars/carsSlice';
 import Image from 'next/image';
-// import { useGetAllCarsQuery } from '@/redux/features/cars/carsSlice';
 import React, { useState } from 'react';
 import CModal from '../custom/CModal/CModal';
 import SingleCar from './SingleCar';
@@ -45,7 +44,7 @@ const Cars = () => {
 
             <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 p-2'>
                 {
-                    cars && cars.map((item: any) => <div key={item._id} className='shadow-2xl bg-white text-black rounded-xl flex flex-col justify-between'>
+                    cars && cars.map((item: any) => <div key={item._id} className='shadow-2xl bg-white text-black rounded flex flex-col justify-between'>
 
                         <div className="w-full p-4">
                             <Image src={item.picture} width={320} height={100} alt="car image" className='mx-auto shadow-2xl shadow-sky-400/50 h-60 w-80 scale-90 hover:scale-100 transition-all duration-700 ease-linear' />
