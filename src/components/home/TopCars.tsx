@@ -17,7 +17,7 @@ const TopCars = ({ topCars }: any) => {
             <div className="max-w-3xl mx-auto">
                 <Reorder.Group axis="y" values={items} onReorder={setItems}>
                     {items.map((item: any) => (
-                        <Reorder.Item key={item} value={item} className="shadow-2xl bg-white text-black p-2 w-full flex justify-around items-center gap-5 mb-5 transition-all duration-700 ease-linear">
+                        <Reorder.Item key={item} value={item} className="shadow-2xl bg-white text-black p-2 w-full flex flex-col md:flex-row justify-around items-center gap-5 mb-5 transition-all duration-700 ease-linear">
                             <div className="">
                                 <Image src={item.picture} width={160} height={120} alt="cars image" className='rounded-lg' />
                             </div>

@@ -3,7 +3,7 @@ import { FaCarSide } from 'react-icons/fa';
 
 const Footer = () => {
     return (
-        <footer>
+        <footer className='p-4'>
             <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-10 gap-10">
 
                 <div className="">
@@ -35,7 +35,7 @@ const Footer = () => {
                 </div>
 
                 <div className="space-y-2">
-                    <h2 className="text-2xl font-bold my-4">Subscribe Now</h2>
+                    <h2 className="text-xl font-bold my-4">Subscribe Now</h2>
                     <div className="">
                         <span className="mr-8">Car-Hub BD</span>
 
