@@ -2,7 +2,7 @@
 
 import useAuth from '@/hooks/useAuth';
 import useTheme, { Theme } from '@/hooks/useTheme';
-import { cookies } from 'next/headers';
+import { useAppSelector } from '@/redux/hooks';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -13,8 +13,8 @@ import { FaCarSide } from 'react-icons/fa';
 const Navbar = () => {
 
     const { user, logOut }: any = useAuth();
-
     const { theme, toggleTheme } = useTheme() as Theme;
+    const cart = useAppSelector(state => state.cart);
 
     const navMenus = <>
         <li><Link href="/">Home</Link></li>
@@ -24,7 +24,9 @@ const Navbar = () => {
         <li><Link href="/#services">Services</Link></li>
         <li><Link href="/#reviews">Reviews</Link></li>
         <li><Link href="/#contact">Contact</Link></li>
-        
+        {
+            user && <li><Link href="/dashboard">Dashboard</Link></li>
+        }
     </>
 
     const { replace, refresh } = useRouter();
@@ -75,29 +77,42 @@ const Navbar = () => {
 
                 {
                     user ?
-                        <div className="dropdown dropdown-end">
-                            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                                <div className="w-10 rounded-full">
-                                    <Image
-                                        alt="user picture"
-                                        src={user?.photoURL ? user?.photoURL : "https://i.ibb.co/5nPD3Qg/user.jpg"}
-                                        title={user?.displayName}
-                                        width={40}
-                                        height={40}
-                                    />
-                                </div>
-                            </label>
-                            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-white rounded-box w-52">
-                                <li>
-                                    <a className="justify-between">
-                                        Profile
-                                        <span className="badge">New</span>
-                                    </a>
-                                </li>
-                                <li><a>Settings</a></li>
-                                <li onClick={handleLogout}><a>Logout</a></li>
-                            </ul>
-                        </div>
+                        <>
+                            <div className="mr-1">
+                                <Link href={"/cart"}>
+                                    <label tabIndex={0} className="btn btn-ghost btn-circle">
+                                        <div className="indicator">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                                            <span className="badge badge-sm indicator-item bg-red-500 text-white">{cart.length}</span>
+                                        </div>
+                                    </label>
+                                </Link>
+                            </div>
+
+                            <div className="dropdown dropdown-end text-black">
+                                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                    <div className="w-10 rounded-full">
+                                        <Image
+                                            alt="user picture"
+                                            src={user?.photoURL ? user?.photoURL : "https://i.ibb.co/5nPD3Qg/user.jpg"}
+                                            title={user?.displayName}
+                                            width={40}
+                                            height={40}
+                                        />
+                                    </div>
+                                </label>
+                                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-white rounded-box w-52">
+                                    <li>
+                                        <a className="justify-between">
+                                            Profile
+                                            <span className="badge">New</span>
+                                        </a>
+                                    </li>
+                                    <li><a>Settings</a></li>
+                                    <li onClick={handleLogout}><a>Logout</a></li>
+                                </ul>
+                            </div>
+                        </>
                         :
                         <>
 
@@ -106,13 +121,14 @@ const Navbar = () => {
 
                 }
 
-                <div className="ms-1">
+                <div className="ms-1 flex items-center">
                     <label className="swap swap-rotate lg:ml-2 flex items-center border-2 border-violet-500 rounded-2xl bg-violet-100 text-black">
                         <input
                             onChange={toggleTheme}
                             type="checkbox"
                             checked={theme === "dark"}
                         />
+                        
                         <svg
                             className="swap-off h-6 w-6 fill-current"
                             xmlns="http://www.w3.org/2000/svg"
@@ -129,6 +145,7 @@ const Navbar = () => {
                         </svg>
 
                     </label>
+                    {/* <input type="checkbox" onChange={toggleTheme} checked={theme === "dark"} className="toggle" /> */}
                 </div>
 
             </div>

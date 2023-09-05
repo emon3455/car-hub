@@ -98,7 +98,7 @@ const MyCarsContainer = () => {
                     title="Car Details"
                     width={"w-full md:w-3/4 lg:w-3/4"}
                 >
-                    <SingleCar car={car} />
+                    <SingleCar car={car} path={"/myCars"}/>
                 </CModal>
             </div>
 

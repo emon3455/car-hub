@@ -1,8 +1,16 @@
 "use client"
+
+import { addToCart } from '@/redux/features/cart/cartSlice';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Image from 'next/image';
 import React from 'react';
 
-const SingleCar = ({ car }: any) => {
+const SingleCar = ({ car, path }: any) => {
+
+    const cart = useAppSelector(state=> state.cart);
+
+    const dispatch = useAppDispatch();
+    
 
     return (
         <section className='p-4'>
@@ -27,8 +35,8 @@ const SingleCar = ({ car }: any) => {
                         <p>
                             <span className='font-semibold'>Descrption: </span>{car.description}
                         </p>
-                        <div className="card-actions justify-end">
-                            <button className="px-2 py-1 text-white rounded-sm font-semibold bg-gradient-to-r  from-pink-500 via-purple-500 to-indigo-500 hover:bg-gradient-to-r  hover:from-blue-500 hover:via-pink-500 hover:to-yellow-500 transition-all duration-1000 ease-linear">Select</button>
+                        <div className={`card-actions ${path=="/myCars" ? "hidden" : "justify-end"}`}>
+                            <button disabled={false} onClick={()=> dispatch(addToCart(car))} className="px-2 py-1 text-white rounded-sm font-semibold bg-gradient-to-r  from-pink-500 via-purple-500 to-indigo-500 hover:bg-gradient-to-r  hover:from-blue-500 hover:via-pink-500 hover:to-yellow-500 transition-all duration-1000 ease-linear">Select</button>
                         </div>
                     </div>
                 </div>
