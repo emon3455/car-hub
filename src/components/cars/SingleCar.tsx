@@ -4,10 +4,11 @@ import { addToCart } from '@/redux/features/cart/cartSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Image from 'next/image';
 import React from 'react';
+import toast from 'react-hot-toast';
 
-const SingleCar = ({ car, path }: any) => {
+const SingleCar = ({ car, path, setIsOpen }: any) => {
 
-    const cart = useAppSelector(state=> state.cart);
+    const cart = useAppSelector((state:any)=> state.cart);
 
     const dispatch = useAppDispatch();
     
@@ -36,7 +37,11 @@ const SingleCar = ({ car, path }: any) => {
                             <span className='font-semibold'>Descrption: </span>{car.description}
                         </p>
                         <div className={`card-actions ${path=="/myCars" ? "hidden" : "justify-end"}`}>
-                            <button disabled={false} onClick={()=> dispatch(addToCart(car))} className="px-2 py-1 text-white rounded-sm font-semibold bg-gradient-to-r  from-pink-500 via-purple-500 to-indigo-500 hover:bg-gradient-to-r  hover:from-blue-500 hover:via-pink-500 hover:to-yellow-500 transition-all duration-1000 ease-linear">Select</button>
+                            <button disabled={false} onClick={()=> {
+                                toast.success("Car Added To Cart");
+                                dispatch(addToCart(car));
+                                setIsOpen(false);
+                            }} className="px-2 py-1 text-white rounded-sm font-semibold bg-gradient-to-r  from-pink-500 via-purple-500 to-indigo-500 hover:bg-gradient-to-r  hover:from-blue-500 hover:via-pink-500 hover:to-yellow-500 transition-all duration-1000 ease-linear">Select</button>
                         </div>
                     </div>
                 </div>

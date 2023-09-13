@@ -82,7 +82,7 @@ const CartComponent = () => {
                                     {item.rating}
                                 </td>
                                 <td>
-                                    <button onClick={() => dispatch(removeFromCart(item._id))} className="btn bg-red-500 hover:text-black text-white text-xl btn-sm">
+                                    <button onClick={() => dispatch(removeFromCart(item._id))} className="btn btn-error text-white text-xl btn-sm">
                                         <FaTrash />
                                     </button>
                                 </td>

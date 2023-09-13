@@ -1,5 +1,5 @@
-import Cars from '@/components/cars/Cars';
 import React from 'react';
+import Cars from '@/components/cars/Cars';
 
 const CarsPage = async () => {
 
