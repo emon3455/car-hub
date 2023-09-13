@@ -1,5 +1,5 @@
-import { Footer, Navbar } from '@/components'
 import './globals.css'
+import { Footer, Navbar } from '@/components'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import ThemeProvider from '@/providers/ThemeProvider'
@@ -8,7 +8,6 @@ import AuthProvider from '@/providers/AuthProvider'
 import TopScrollProvider from '@/providers/TopScrollProvider'
 import ReduxProvider from '@/redux/reduxProvoder/ReduxProvider'
 
-
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -16,11 +15,7 @@ export const metadata: Metadata = {
   description: 'An Website to find, Buy, or Sell your dream car',
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children, }: { children: React.ReactNode }) {
   return (
     <html lang="en" data-theme="dark" className='transition-all scroll-smooth'>
 
@@ -29,15 +24,12 @@ export default function RootLayout({
         <ReduxProvider>
           <AuthProvider>
             <ThemeProvider>
-              <Navbar></Navbar>
-
+              <Navbar />
               {children}
-
-              <Footer></Footer>
+              <Footer />
             </ThemeProvider>
           </AuthProvider>
         </ReduxProvider>
-
 
 
         <TopScrollProvider />

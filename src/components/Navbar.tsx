@@ -23,10 +23,10 @@ const Navbar = () => {
         <li><Link href="/myCars">My Cars</Link></li>
         <li><Link href="/#services">Services</Link></li>
         <li><Link href="/#reviews">Reviews</Link></li>
-        <li><Link href="/#contact">Contact</Link></li>
         {
-            user && <li><Link href="/dashboard">Dashboard</Link></li>
+            user && <li><Link href="/manageCars">Manage Cars</Link></li>
         }
+        <li><Link href="/#contact">Contact</Link></li>
     </>
 
     const { replace, refresh } = useRouter();
