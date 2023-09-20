@@ -1,10 +1,13 @@
 "use client"
 import React from 'react';
 
-const UpdateCars = () => {
+const UpdateCars = ({setOpenModal, dataForUpdate, refetch}:any) => {
+
+
+
     return (
         <div>
-            
+            update modal
         </div>
     );
 };

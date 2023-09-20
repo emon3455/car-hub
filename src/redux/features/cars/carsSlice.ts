@@ -50,4 +50,9 @@ export const carsSlice = apiSlice.injectEndpoints({
     }),
 });
 
-export const { useGetAllCarsDataQuery, useGetAllMycarsDataQuery } = carsSlice;
+export const { 
+    useGetAllCarsDataQuery, 
+    useGetAllMycarsDataQuery, 
+    useDeleteCarsMutation, 
+    useUpdateNoticeMutation, 
+} = carsSlice;

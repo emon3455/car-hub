@@ -2,12 +2,19 @@
 
 import Loading from '@/app/loading';
 import useAuth from '@/hooks/useAuth';
-import { useGetAllMycarsDataQuery } from '@/redux/features/cars/carsSlice';
+import { useDeleteCarsMutation, useGetAllMycarsDataQuery, } from '@/redux/features/cars/carsSlice';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { FaEdit } from 'react-icons/fa';
+import Swal from 'sweetalert2';
+import CModal from '../custom/CModal/CModal';
+import UpdateCars from './updateCars/UpdateCars';
 
 const ManageCarsContainer = () => {
+
+    const [openModal, setOpenModal] = useState(false);
+    const [dataForUpdate, setDataForUpdate] = useState({});
 
     const { user }: any = useAuth();
 
@@ -19,13 +26,61 @@ const ManageCarsContainer = () => {
         }
     )
 
+    const [
+        deleteCars,
+        {
+            isLoading: deletCarLoading,
+            isSuccess: deletCarSuccess,
+            isError: deletCarIsError,
+            data: deletecarData,
+            error: deleteCarError,
+        },
+    ] = useDeleteCarsMutation();
+
+    //showing success message
+    useEffect(() => {
+        if (deletCarSuccess) {
+            refetch();
+            toast.success("Car Deleted successfully");
+        }
+    }, [refetch, deletCarSuccess]);
+
+    //showing error message
+    useEffect(() => {
+        if (deletCarIsError) {
+            // console.log(registerError);
+            toast.error(`${deleteCarError?.message}`);
+
+        }
+    }, [deletCarIsError, deleteCarError]);
+
+    const handleDelete = (id: any) => {
+        console.log("Deleted");
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Once Deleted, you will not be able to revert this!",
+            showCancelButton: true,
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                console.log(id);
+
+                try {
+                    await deleteCars(id)?.unwrap();
+                } catch (err: any) {
+                    console.log(err);
+                }
+            }
+        })
+
+    };
+
 
     if (isLoading) return <Loading />
 
     if (isError) return <h2 className="text-center font-semibold text-xl mt-4 text-red-500">
         {error?.error}
     </h2>
-
 
     return (
         <section className='container mx-auto'>
@@ -64,10 +119,17 @@ const ManageCarsContainer = () => {
                                 <td>{item?.rating}</td>
                                 <td>{item?.availableQuantity}</td>
                                 <td className='flex items-center gap-2'>
-                                    <button className="btn btn-circle btn-outline btn-sm">
+                                    <button
+                                        onClick={() => {
+                                            setOpenModal(true);
+                                            setDataForUpdate(item);
+                                        }}
+                                        className="btn btn-circle btn-outline btn-sm">
                                         <FaEdit className='text-lg' />
                                     </button>
-                                    <button className="btn btn-circle btn-outline btn-sm">
+                                    <button
+                                        onClick={() => handleDelete(item._id)}
+                                        className="btn btn-circle btn-outline btn-sm">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                                         </svg>
                                     </button>
@@ -77,7 +139,16 @@ const ManageCarsContainer = () => {
                     </tbody>
                 </table>
             </div>
-            
+
+            <CModal
+                open={openModal}
+                onClose={() => setOpenModal(false)}
+                title="Update Cars"
+                width={"w-full md:w-3/4 lg:w-2/3"}
+            >
+                <UpdateCars setOpenModal={setOpenModal} refetch={refetch} dataForUpdate={dataForUpdate} />
+            </CModal>
+
         </section>
     );
 };
