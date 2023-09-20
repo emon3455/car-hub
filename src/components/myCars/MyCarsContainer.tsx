@@ -49,7 +49,7 @@ const MyCarsContainer = () => {
 
         <section className=''>
 
-            <div className="p-2">
+            <div className="p-2 flex justify-end">
                 <form onSubmit={handleSearch}>
                     <input type="text" onChange={(e: any) => setSearch(e.target.value)} placeholder='Search By Name' className='p-2 border-2 border-violet-700 focus:outline-none' />
                     <button type='submit' className='p-2 border-2 border-violet-700 rounded-r-full bg-violet-500 text-white'>Search</button>

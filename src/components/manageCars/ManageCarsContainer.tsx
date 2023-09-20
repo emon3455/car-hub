@@ -25,9 +25,9 @@ const ManageCarsContainer = () => {
 
 
     return (
-        <div>
+        <section>
             
-        </div>
+        </section>
     );
 };
 
