@@ -3,8 +3,6 @@ import React from 'react';
 
 const UpdateCars = ({setOpenModal, dataForUpdate, refetch}:any) => {
 
-
-
     return (
         <div>
             update modal
