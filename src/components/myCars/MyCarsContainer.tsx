@@ -30,23 +30,19 @@ const MyCarsContainer = () => {
     }, [data])
 
 
-    const handleSearch =(e:any)=>{
+    const handleSearch = (e: any) => {
         e.preventDefault();
         const text = search.toLowerCase();
-        const searchCars = data.filter((item:any)=> item.toyName.toLowerCase().includes(text))
+        const searchCars = data.filter((item: any) => item.toyName.toLowerCase().includes(text))
         setCars(searchCars)
     }
 
 
-    if (isLoading) {
-        return <Loading />
-    }
+    if (isLoading) return <Loading />
 
-    if (isError) {
-        return <h2 className="text-center font-semibold text-xl mt-4 text-red-500">
-            {error?.error}
-        </h2>
-    }
+    if (isError) return <h2 className="text-center font-semibold text-xl mt-4 text-red-500">
+        {error?.error}
+    </h2>
 
 
     return (
@@ -98,7 +94,7 @@ const MyCarsContainer = () => {
                     title="Car Details"
                     width={"w-full md:w-3/4 lg:w-3/4"}
                 >
-                    <SingleCar car={car} path={"/myCars"}/>
+                    <SingleCar car={car} path={"/myCars"} />
                 </CModal>
             </div>
 

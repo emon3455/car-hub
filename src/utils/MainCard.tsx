@@ -10,7 +10,7 @@ const MainCard = ({
   secondary?: React.ReactNode;
 }>) => {
   return (
-    <main className="border border-gray-200 rounded bg-white md:p-4 p-2 mb-4 dark:bg-dark dark:border dark:border-gray-800">
+    <main className="border border-gray-200 rounded bg-base-200 md:p-4 p-2 mb-4">
       <Show when={title || secondary ? true : false}>
         <section className="flex justify-between items-center">
           <aside>
