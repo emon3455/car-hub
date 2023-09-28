@@ -36,7 +36,7 @@ export const carsSlice = apiSlice.injectEndpoints({
             },
         }),
 
-        updateNotice: builder.mutation({
+        updateCars: builder.mutation({
             query: (data: any) => {
                 const{id, info} = data;
                 return {
@@ -54,5 +54,5 @@ export const {
     useGetAllCarsDataQuery, 
     useGetAllMycarsDataQuery, 
     useDeleteCarsMutation, 
-    useUpdateNoticeMutation, 
+    useUpdateCarsMutation, 
 } = carsSlice;

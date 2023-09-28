@@ -63,8 +63,6 @@ const ManageCarsContainer = () => {
             showCancelButton: true,
         }).then(async (result) => {
             if (result.isConfirmed) {
-                console.log(id);
-
                 try {
                     await deleteCars(id)?.unwrap();
                 } catch (err: any) {
