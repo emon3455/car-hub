@@ -1,12 +1,18 @@
 "use client"
+
 import CSelect from '@/components/CSelect';
+import useTheme from '@/hooks/useTheme';
+import { ThemeContext } from '@/providers/ThemeProvider';
 import { useUpdateCarsMutation } from '@/redux/features/cars/carsSlice';
 import { useGetAllCategoryDataQuery } from '@/redux/features/category/categorySlice';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 const UpdateCars = ({ setOpenModal, dataForUpdate, refetch }: any) => {
+
+
+    const theme = localStorage.getItem("theme");
 
     const [error, setError] = useState("");
     const [data, setData] = useState({
@@ -71,11 +77,11 @@ const UpdateCars = ({ setOpenModal, dataForUpdate, refetch }: any) => {
 
 
     const handleUpdate = async (e: any) => {
-        
+
         e.preventDefault();
 
         setError("");
-        if(!data?.price || !data?.rating || !data?.availableQuantity || !data?.description){
+        if (!data?.price || !data?.rating || !data?.availableQuantity || !data?.description) {
             setError("Price, rating, availableQuantity, description. These fields cannot be empty!!")
             return;
         }
@@ -103,13 +109,14 @@ const UpdateCars = ({ setOpenModal, dataForUpdate, refetch }: any) => {
 
     return (
         <main>
+            <h2 className="lg:text-2xl font-bold text-center">Update: <span className='text-violet-500'> {dataForUpdate?.toyName} </span></h2>
             <form onSubmit={handleUpdate} className="card-body">
 
-                <h2 className="lg:text-2xl font-bold text-center">Update: <span className='text-violet-500'> {dataForUpdate?.toyName} </span></h2>
 
                 <h2 className='text-center text-red-600 font-semibold'>{error && error}</h2>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center" >
+
 
                     <div className="form-control opacity-50">
                         <label className="label">
@@ -120,7 +127,8 @@ const UpdateCars = ({ setOpenModal, dataForUpdate, refetch }: any) => {
                             readOnly
                             defaultValue={data?.sellerName}
                             placeholder="sellerName"
-                            className="input input-bordered w-full"
+                            className={`${theme == "dark" && "text-white"} input input-bordered w-full`}
+
                         />
                     </div>
 
@@ -133,7 +141,7 @@ const UpdateCars = ({ setOpenModal, dataForUpdate, refetch }: any) => {
                             readOnly
                             defaultValue={data?.sellerEmail}
                             placeholder="sellerEmail"
-                            className="input input-bordered w-full"
+                            className={`${theme == "dark" && "text-white"} input input-bordered w-full`}
                         />
                     </div>
 
@@ -165,7 +173,7 @@ const UpdateCars = ({ setOpenModal, dataForUpdate, refetch }: any) => {
                             type="number"
                             defaultValue={data?.price}
                             placeholder="price"
-                            className="input input-bordered w-full"
+                            className={`${theme == "dark" && "text-white"} input input-bordered w-full`}
                             onChange={(e) => {
                                 if (e.target.value) {
                                     setData({ ...data, price: e.target.value });
@@ -182,7 +190,7 @@ const UpdateCars = ({ setOpenModal, dataForUpdate, refetch }: any) => {
                             type="number"
                             defaultValue={data?.availableQuantity}
                             placeholder="availableQuantity"
-                            className="input input-bordered w-full"
+                            className={`${theme == "dark" && "text-white"} input input-bordered w-full`}
                             onChange={(e) => {
                                 if (e.target.value) {
                                     setData({ ...data, availableQuantity: e.target.value });
@@ -206,7 +214,7 @@ const UpdateCars = ({ setOpenModal, dataForUpdate, refetch }: any) => {
                                 }
                             }}
                             placeholder="rating"
-                            className="input input-bordered w-full"
+                            className={`${theme == "dark" && "text-white"} input input-bordered w-full`}
                         />
 
                     </div>
@@ -225,7 +233,7 @@ const UpdateCars = ({ setOpenModal, dataForUpdate, refetch }: any) => {
                             }
                         }}
                         placeholder="Description"
-                        className=" rounded-lg p-2 h-24 input input-bordered "
+                        className={`${theme == "dark" && "text-white"} rounded-lg p-2 h-24 input input-bordered`}
                     />
 
                 </div>

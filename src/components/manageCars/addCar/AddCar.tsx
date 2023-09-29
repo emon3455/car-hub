@@ -9,6 +9,7 @@ import toast from 'react-hot-toast';
 
 const AddCar = ({ setOpenModal1, refetch }: any) => {
 
+    const theme = localStorage.getItem("theme");
     const { user }: any = useAuth();
 
     const {
@@ -127,7 +128,7 @@ const AddCar = ({ setOpenModal1, refetch }: any) => {
                             type="text"
                             required
                             placeholder="Car Name"
-                            className="input input-bordered w-full"
+                            className={`${theme == "dark" && "text-white"} input input-bordered w-full`}
                             onChange={(e) => {
                                 if (e.target.value) {
                                     setInfo({ ...info, toyName: e.target.value });
@@ -142,10 +143,8 @@ const AddCar = ({ setOpenModal1, refetch }: any) => {
                         </label>
                         <input
                             type="file"
-                            //   id="photo"
-                            //   name="photo"
                             onChange={uploadImage}
-                            className="file-input file-input-bordered w-full"
+                            className={`${theme == "dark" && "text-white"} file-input file-input-bordered  w-full`}
                             required
                         />
                     </div>
@@ -159,7 +158,7 @@ const AddCar = ({ setOpenModal1, refetch }: any) => {
                             readOnly
                             defaultValue={user?.displayName}
                             placeholder="sellerName"
-                            className="input input-bordered w-full"
+                            className={`${theme == "dark" && "text-white"} input input-bordered w-full`}
 
                         />
                     </div>
@@ -173,7 +172,7 @@ const AddCar = ({ setOpenModal1, refetch }: any) => {
                             readOnly
                             defaultValue={user?.email}
                             placeholder="Seller Email"
-                            className="input input-bordered w-full"
+                            className={`${theme == "dark" && "text-white"} input input-bordered w-full`}
                         />
                     </div>
 
@@ -205,7 +204,7 @@ const AddCar = ({ setOpenModal1, refetch }: any) => {
                             type="number"
                             placeholder="Price"
                             required
-                            className="input input-bordered w-full"
+                            className={`${theme == "dark" && "text-white"} input input-bordered w-full`}
                             onChange={(e) => {
                                 if (e.target.value) {
                                     setInfo({ ...info, price: parseFloat(e.target.value) });
@@ -222,7 +221,7 @@ const AddCar = ({ setOpenModal1, refetch }: any) => {
                             type="number"
                             placeholder="Available Quantity"
                             required
-                            className="input input-bordered w-full"
+                            className={`${theme == "dark" && "text-white"} input input-bordered w-full`}
                             onChange={(e) => {
                                 if (e.target.value) {
                                     setInfo({ ...info, availableQuantity: parseFloat(e.target.value) });
@@ -246,7 +245,7 @@ const AddCar = ({ setOpenModal1, refetch }: any) => {
                             }}
                             required
                             placeholder="Rating"
-                            className="input input-bordered w-full"
+                            className={`${theme == "dark" && "text-white"} input input-bordered w-full`}
                         />
 
                     </div>
@@ -265,7 +264,7 @@ const AddCar = ({ setOpenModal1, refetch }: any) => {
                         }}
                         required
                         placeholder="Description"
-                        className=" rounded-lg p-2 h-24 input input-bordered "
+                        className={`${theme == "dark" && "text-white"} rounded-lg p-2 h-24 input input-bordered`}
                     />
 
                 </div>

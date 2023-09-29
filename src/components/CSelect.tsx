@@ -54,7 +54,7 @@ const CSelect = ({
                 name={name}
                 id={id}
                 className={`${className} ${width ? width : "w-full"
-                    }  border-0 border-dark-primary rounded-md outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent dark:bg-black/10`}
+                    }  border-0 rounded-md outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent ${theme == "dark" && "bg-black/10 text-white"}`}
                 onChange={(selectedOptions) => onChange?.(selectedOptions)}
                 classNamePrefix={classNamePrefix || "select"}
                 closeMenuOnSelect={true}
