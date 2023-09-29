@@ -19,12 +19,15 @@ const Navbar = () => {
     const navMenus = <>
         <li><Link href="/">Home</Link></li>
         <li><Link href="/#about">About</Link></li>
-        <li><Link href="/cars">Cars</Link></li>
-        <li><Link href="/myCars">My Cars</Link></li>
         <li><Link href="/#services">Services</Link></li>
         <li><Link href="/#reviews">Reviews</Link></li>
+        <li><Link href="/cars">Cars</Link></li>
         {
-            user && <li><Link href="/manageCars">Manage Cars</Link></li>
+            user && <>
+                <li><Link href="/myCars">My Cars</Link></li>
+                <li><Link href="/manageCars">Manage Cars</Link></li>
+            </>
+
         }
         <li><Link href="/#contact">Contact</Link></li>
     </>
@@ -128,7 +131,7 @@ const Navbar = () => {
                             type="checkbox"
                             checked={theme === "dark"}
                         />
-                        
+
                         <svg
                             className="swap-off h-6 w-6 fill-current"
                             xmlns="http://www.w3.org/2000/svg"

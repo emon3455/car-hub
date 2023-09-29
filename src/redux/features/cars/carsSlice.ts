@@ -27,6 +27,16 @@ export const carsSlice = apiSlice.injectEndpoints({
             }
         }),
 
+        addCar: builder.mutation({
+            query: (data: any) => {
+              return {
+                url: `/cars`,
+                method: "POST",
+                body: data,
+              };
+            },
+        }),
+
         deleteCars: builder.mutation({
             query: (id: any) => {
                 return {
@@ -54,5 +64,6 @@ export const {
     useGetAllCarsDataQuery, 
     useGetAllMycarsDataQuery, 
     useDeleteCarsMutation, 
+    useAddCarMutation, 
     useUpdateCarsMutation, 
 } = carsSlice;

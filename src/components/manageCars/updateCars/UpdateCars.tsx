@@ -26,12 +26,6 @@ const UpdateCars = ({ setOpenModal, dataForUpdate, refetch }: any) => {
         data: categorys,
     } = useGetAllCategoryDataQuery({});
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
-
     const [
         updateCars,
         {
@@ -76,10 +70,13 @@ const UpdateCars = ({ setOpenModal, dataForUpdate, refetch }: any) => {
     }, [updateIsError, setOpenModal])
 
 
-    const onSubmit = async (info: any) => {
+    const handleUpdate = async (e: any) => {
+        
+        e.preventDefault();
+
         setError("");
         if(!data?.price || !data?.rating || !data?.availableQuantity || !data?.description){
-            setError("Price, rating, availableQuantity, description. These field cannot be empty!!")
+            setError("Price, rating, availableQuantity, description. These fields cannot be empty!!")
             return;
         }
 
@@ -106,7 +103,7 @@ const UpdateCars = ({ setOpenModal, dataForUpdate, refetch }: any) => {
 
     return (
         <main>
-            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+            <form onSubmit={handleUpdate} className="card-body">
 
                 <h2 className="lg:text-2xl font-bold text-center">Update: <span className='text-violet-500'> {dataForUpdate?.toyName} </span></h2>
 
@@ -200,7 +197,8 @@ const UpdateCars = ({ setOpenModal, dataForUpdate, refetch }: any) => {
                             <span className="label-text">Rating</span>
                         </label>
                         <input
-                            type="text"
+                            type="number"
+                            step="0.1"
                             defaultValue={data?.rating}
                             onChange={(e) => {
                                 if (e.target.value) {
@@ -237,7 +235,7 @@ const UpdateCars = ({ setOpenModal, dataForUpdate, refetch }: any) => {
                     <button
                         type="submit"
                         value="Update"
-                        className={`btn btn-warning mt-2 text-white font-semibold`}
+                        className="btn btn-warning btn-sm rounded mt-2 text-white font-semibold"
                     >
                         {updateIsLoading ? <span className='loading loading-spinner'></span> : "Update"}
                     </button>

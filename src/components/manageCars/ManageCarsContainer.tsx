@@ -10,10 +10,12 @@ import { FaEdit } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import CModal from '../custom/CModal/CModal';
 import UpdateCars from './updateCars/UpdateCars';
+import AddCar from './addCar/AddCar';
 
 const ManageCarsContainer = () => {
 
     const [openModal, setOpenModal] = useState(false);
+    const [openModal1, setOpenModal1] = useState(false);
     const [dataForUpdate, setDataForUpdate] = useState({});
 
     const { user }: any = useAuth();
@@ -82,7 +84,16 @@ const ManageCarsContainer = () => {
 
     return (
         <section className='container mx-auto'>
-
+            <div className="flex justify-between p-1 my-4">
+                <h2 className='lg:text-2xl font-bold text-violet-500 border-b-4 border-red-500'>Cars List:</h2>
+                <button 
+                onClick={() => {
+                    setOpenModal1(true);
+                }}
+                className='btn btn-primary btn-sm text-white rounded'>
+                    Add Car
+                </button>
+            </div>
             <div className="overflow-x-auto">
                 <table className="table table-zebra">
                     <thead>
@@ -145,6 +156,15 @@ const ManageCarsContainer = () => {
                 width={"w-full md:w-3/4 lg:w-2/3"}
             >
                 <UpdateCars setOpenModal={setOpenModal} refetch={refetch} dataForUpdate={dataForUpdate} />
+            </CModal>
+
+            <CModal
+                open={openModal1}
+                onClose={() => setOpenModal1(false)}
+                title="Add Car"
+                width={"w-full md:w-3/4 lg:w-2/3"}
+            >
+                <AddCar setOpenModal1={setOpenModal1} refetch={refetch} />
             </CModal>
 
         </section>
