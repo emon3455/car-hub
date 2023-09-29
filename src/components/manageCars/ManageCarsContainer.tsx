@@ -141,7 +141,7 @@ const ManageCarsContainer = () => {
             <CModal
                 open={openModal}
                 onClose={() => setOpenModal(false)}
-                title="Update Cars"
+                title="Update Car"
                 width={"w-full md:w-3/4 lg:w-2/3"}
             >
                 <UpdateCars setOpenModal={setOpenModal} refetch={refetch} dataForUpdate={dataForUpdate} />

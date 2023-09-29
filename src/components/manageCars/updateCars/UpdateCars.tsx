@@ -1,28 +1,29 @@
 "use client"
 import CSelect from '@/components/CSelect';
+import { useUpdateCarsMutation } from '@/redux/features/cars/carsSlice';
 import { useGetAllCategoryDataQuery } from '@/redux/features/category/categorySlice';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 const UpdateCars = ({ setOpenModal, dataForUpdate, refetch }: any) => {
 
+    const [error, setError] = useState("");
     const [data, setData] = useState({
         category: dataForUpdate?.category,
         category_id: dataForUpdate?.category_id,
+        toyName: dataForUpdate?.toyName,
+        _id: dataForUpdate?._id,
+        sellerName: dataForUpdate?.sellerName,
+        sellerEmail: dataForUpdate?.sellerEmail,
+        price: dataForUpdate?.price,
+        rating: dataForUpdate?.rating,
+        availableQuantity: dataForUpdate?.availableQuantity,
+        description: dataForUpdate?.description,
     })
 
-    useEffect(() => {
-        setData({
-            category: dataForUpdate?.category,
-            category_id: dataForUpdate?.category_id,
-        });
-    }, [dataForUpdate])
-
     const {
-        isLoading,
-        isError,
         data: categorys,
-        error,
     } = useGetAllCategoryDataQuery({});
 
     const {
@@ -31,32 +32,87 @@ const UpdateCars = ({ setOpenModal, dataForUpdate, refetch }: any) => {
         formState: { errors },
     } = useForm();
 
+    const [
+        updateCars,
+        {
+            isLoading: updateIsLoading,
+            isSuccess: updateIsSuccess,
+            isError: updateIsError,
+            data: updateData,
+            error: updateError,
+        },
+    ] = useUpdateCarsMutation();
+
+    useEffect(() => {
+        setData({
+            category: dataForUpdate?.category,
+            category_id: dataForUpdate?.category_id,
+            toyName: dataForUpdate?.toyName,
+            _id: dataForUpdate?._id,
+            sellerName: dataForUpdate?.sellerName,
+            sellerEmail: dataForUpdate?.sellerEmail,
+            price: dataForUpdate?.price,
+            rating: dataForUpdate?.rating,
+            availableQuantity: dataForUpdate?.availableQuantity,
+            description: dataForUpdate?.description,
+        });
+    }, [dataForUpdate])
+
+    // showing success message
+    useEffect(() => {
+        if (updateIsSuccess) {
+            toast.success("Car Updated Successfully");
+            refetch();
+            setOpenModal(false);
+        }
+    }, [updateIsSuccess, setOpenModal, refetch]);
+
+    //showing error message
+    useEffect(() => {
+        if (updateIsError) {
+            toast.error("Error Doing Update!!");
+            setOpenModal(false);
+        }
+    }, [updateIsError, setOpenModal])
+
+
     const onSubmit = async (info: any) => {
-        console.log(info);
-        console.log(data);
-        alert("submit")
+        setError("");
+        if(!data?.price || !data?.rating || !data?.availableQuantity || !data?.description){
+            setError("Price, rating, availableQuantity, description. These field cannot be empty!!")
+            return;
+        }
+
+        const updatedData = {
+            category: data?.category,
+            category_id: data?.category_id,
+            price: parseFloat(data?.price),
+            rating: parseFloat(data?.rating),
+            availableQuantity: parseFloat(data?.availableQuantity),
+            description: data?.description,
+        }
+
+        const updatedObject = {
+            id: data._id,
+            updatedData: updatedData
+        }
+
+        try {
+            await updateCars(updatedObject)?.unwrap();
+        } catch (err: any) {
+            console.log(err);
+        }
     }
 
     return (
         <main>
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
 
-                <h2 className="text-3xl font-bold text-center">Update Car Information</h2>
+                <h2 className="lg:text-2xl font-bold text-center">Update: <span className='text-violet-500'> {dataForUpdate?.toyName} </span></h2>
 
-                <div className="">
+                <h2 className='text-center text-red-600 font-semibold'>{error && error}</h2>
 
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Name</span>
-                        </label>
-                        <input
-                            type="text"
-                            defaultValue={dataForUpdate?.toyName}
-                            placeholder="name"
-                            {...register('name')}
-                            className="input input-bordered w-full"
-                        />
-                    </div>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center">
 
                     <div className="form-control opacity-50">
                         <label className="label">
@@ -65,7 +121,7 @@ const UpdateCars = ({ setOpenModal, dataForUpdate, refetch }: any) => {
                         <input
                             type="text"
                             readOnly
-                            defaultValue={dataForUpdate?.sellerName}
+                            defaultValue={data?.sellerName}
                             placeholder="sellerName"
                             className="input input-bordered w-full"
                         />
@@ -78,13 +134,13 @@ const UpdateCars = ({ setOpenModal, dataForUpdate, refetch }: any) => {
                         <input
                             type="email"
                             readOnly
-                            defaultValue={dataForUpdate?.sellerEmail}
+                            defaultValue={data?.sellerEmail}
                             placeholder="sellerEmail"
                             className="input input-bordered w-full"
                         />
                     </div>
 
-                    <div className="">
+                    <div className="lg:mt-4">
                         <CSelect
                             label="Category"
                             defaultValue={{ value: data?.category, label: data?.category }}
@@ -110,10 +166,14 @@ const UpdateCars = ({ setOpenModal, dataForUpdate, refetch }: any) => {
                         </label>
                         <input
                             type="number"
-                            defaultValue={dataForUpdate?.price}
+                            defaultValue={data?.price}
                             placeholder="price"
-                            {...register('price')}
                             className="input input-bordered w-full"
+                            onChange={(e) => {
+                                if (e.target.value) {
+                                    setData({ ...data, price: e.target.value });
+                                }
+                            }}
                         />
                     </div>
 
@@ -123,12 +183,16 @@ const UpdateCars = ({ setOpenModal, dataForUpdate, refetch }: any) => {
                         </label>
                         <input
                             type="number"
-                            defaultValue={dataForUpdate?.availableQuantity}
+                            defaultValue={data?.availableQuantity}
                             placeholder="availableQuantity"
-                            {...register('availableQuantity')}
                             className="input input-bordered w-full"
+                            onChange={(e) => {
+                                if (e.target.value) {
+                                    setData({ ...data, availableQuantity: e.target.value });
+                                }
+                            }}
                         />
-                       
+
                     </div>
 
                     <div className="form-control">
@@ -137,37 +201,48 @@ const UpdateCars = ({ setOpenModal, dataForUpdate, refetch }: any) => {
                         </label>
                         <input
                             type="text"
-                            defaultValue={dataForUpdate?.rating}
+                            defaultValue={data?.rating}
+                            onChange={(e) => {
+                                if (e.target.value) {
+                                    setData({ ...data, rating: e.target.value });
+                                }
+                            }}
                             placeholder="rating"
-                            {...register('rating')}
                             className="input input-bordered w-full"
                         />
-                        
-                    </div>
 
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Description</span>
-                        </label>
-                        <textarea
-                            defaultValue={dataForUpdate?.description}
-                            placeholder="Description"
-                            className=" rounded-lg p-2 h-24 input input-bordered input-success"
-                            {...register('description')}
-                        />
-                        
                     </div>
 
                 </div>
 
+                <div className="form-control">
+                    <label className="label">
+                        <span className="label-text">Description</span>
+                    </label>
+                    <textarea
+                        defaultValue={data?.description}
+                        onChange={(e) => {
+                            if (e.target.value) {
+                                setData({ ...data, description: e.target.value });
+                            }
+                        }}
+                        placeholder="Description"
+                        className=" rounded-lg p-2 h-24 input input-bordered "
+                    />
 
-                <div className="text-center">
-                    <input
+                </div>
+
+
+                <div className="text-right">
+                    <button
                         type="submit"
                         value="Update"
-                        className="btn btn-warning mt-2 text-white font-semibold"
-                    />
+                        className={`btn btn-warning mt-2 text-white font-semibold`}
+                    >
+                        {updateIsLoading ? <span className='loading loading-spinner'></span> : "Update"}
+                    </button>
                 </div>
+
             </form>
         </main>
     );

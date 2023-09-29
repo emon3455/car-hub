@@ -38,11 +38,11 @@ export const carsSlice = apiSlice.injectEndpoints({
 
         updateCars: builder.mutation({
             query: (data: any) => {
-                const{id, info} = data;
+                const{id, updatedData} = data;
                 return {
                     url: `/cars/${id}`,
-                    method: "PUT",
-                    body: info,
+                    method: "PATCH",
+                    body: updatedData,
                 };
             },
         }),
